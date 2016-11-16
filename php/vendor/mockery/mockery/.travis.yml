@@ -4,26 +4,38 @@ php:
   - 5.3
   - 5.4
   - 5.5
+  - 5.6
+  - 7.0
   - hhvm
-
-before_script:
-  - composer self-update
-  - composer install --no-interaction --prefer-source --dev
-  - sh -c "if [ \"$TRAVIS_PHP_VERSION\" != \"hhvm\" ]; then echo \"extension = mongo.so\nextension = redis.so\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi"
-  - phpenv rehash
-
-script:
-  - phpunit -v --colors --coverage-text --coverage-clover ./build/logs/clover.xml
-
-after_script:
-  - php vendor/bin/coveralls -v
+  - hhvm-nightly
 
 matrix:
   allow_failures:
     - php: hhvm
-  fast_finish: true
+    - php: hhvm-nightly
 
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_install:
+  - composer self-update
+
+install:
+  - travis_retry ./travis/install.sh
+
+before_script:
+  - ./travis/before_script.sh
+
+script:
+  - ./travis/script.sh
+
+after_script:
+  - ./travis/after_script.sh
 notifications:
   email:
     - padraic.brady@gmail.com
     - dave@atstsolutions.co.uk
+  irc: "irc.freenode.org#mockery"

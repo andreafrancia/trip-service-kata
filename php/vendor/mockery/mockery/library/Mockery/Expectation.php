@@ -14,13 +14,13 @@
  *
  * @category   Mockery
  * @package    Mockery
- * @copyright  Copyright (c) 2010 Pádraic Brady (http://blog.astrumfutura.com)
+ * @copyright  Copyright (c) 2010-2014 Pádraic Brady (http://blog.astrumfutura.com)
  * @license    http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
  */
 
 namespace Mockery;
 
-class Expectation
+class Expectation implements ExpectationInterface
 {
 
     /**
@@ -86,6 +86,13 @@ class Expectation
      * @var array
      */
     protected $_closureQueue = array();
+
+    /**
+     * Array of values to be set when this expectation matches
+     *
+     * @var array
+     */
+    protected $_setQueue = array();
 
     /**
      * Integer representing the call order of this expectation
@@ -173,7 +180,24 @@ class Expectation
         if ($return instanceof \Exception && $this->_throw === true) {
             throw $return;
         }
+        $this->_setValues();
         return $return;
+    }
+
+    /**
+     * Sets public properties with queued values to the mock object
+     *
+     * @param array $args
+     * @return mixed
+     */
+    protected function _setValues()
+    {
+        foreach ($this->_setQueue as $name => &$values) {
+            if (count($values) > 0) {
+                $value = array_shift($values);
+                $this->_mock->{$name} = $value;
+            }
+        }
     }
 
     /**
@@ -192,6 +216,32 @@ class Expectation
             return array_shift($this->_returnQueue);
         } elseif (count($this->_returnQueue) > 0) {
             return current($this->_returnQueue);
+        }
+
+        $rm = $this->_mock->mockery_getMethod($this->_name);
+        if ($rm && version_compare(PHP_VERSION, '7.0.0-dev') >= 0 && $rm->hasReturnType()) {
+            $type = (string) $rm->getReturnType();
+            switch ($type) {
+                case '':       return;
+                case 'string': return '';
+                case 'int':    return 0;
+                case 'float':  return 0.0;
+                case 'bool':   return false;
+                case 'array':  return array();
+
+                case 'callable':
+                case 'Closure':
+                    return function () {};
+
+                case 'Traversable':
+                case 'Generator':
+                    // Remove eval() when minimum version >=5.5
+                    $generator = eval('return function () { yield; };');
+                    return $generator();
+
+                default:
+                    return \Mockery::mock($type);
+            }
         }
     }
 
@@ -256,18 +306,20 @@ class Expectation
      */
     public function matchArgs(array $args)
     {
-        if(empty($this->_expectedArgs) && !$this->_noArgsExpectation) {
+        if (empty($this->_expectedArgs) && !$this->_noArgsExpectation) {
             return true;
         }
-        if(count($args) !== count($this->_expectedArgs)) {
+        if (count($args) !== count($this->_expectedArgs)) {
             return false;
         }
-        for ($i=0; $i<count($args); $i++) {
+        $argCount = count($args);
+        for ($i=0; $i<$argCount; $i++) {
             $param =& $args[$i];
             if (!$this->_matchArg($this->_expectedArgs[$i], $param)) {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -286,14 +338,18 @@ class Expectation
             return true;
         }
         if (is_string($expected) && !is_array($actual) && !is_object($actual)) {
-            $result = @preg_match($expected, (string) $actual);
-            if($result) {
+            # push/pop an error handler here to to make sure no error/exception thrown if $expected is not a regex
+            set_error_handler(function () {});
+            $result = preg_match($expected, (string) $actual);
+            restore_error_handler();
+
+            if ($result) {
                 return true;
             }
         }
         if (is_string($expected) && is_object($actual)) {
             $result = $actual instanceof $expected;
-            if($result) {
+            if ($result) {
                 return true;
             }
         }
@@ -309,13 +365,12 @@ class Expectation
     /**
      * Expected argument setter for the expectation
      *
-     * @param mixed
+     * @param mixed ...
      * @return self
      */
     public function with()
     {
-        $this->_expectedArgs = func_get_args();
-        return $this;
+        return $this->withArgs(func_get_args());
     }
 
     /**
@@ -326,7 +381,11 @@ class Expectation
      */
     public function withArgs(array $args)
     {
+        if (empty($args)) {
+            return $this->withNoArgs();
+        }
         $this->_expectedArgs = $args;
+        $this->_noArgsExpectation = false;
         return $this;
     }
 
@@ -338,7 +397,8 @@ class Expectation
     public function withNoArgs()
     {
         $this->_noArgsExpectation = true;
-        return $this->with();
+        $this->_expectedArgs = null;
+        return $this;
     }
 
     /**
@@ -355,6 +415,7 @@ class Expectation
     /**
      * Set a return value, or sequential queue of return values
      *
+     * @param mixed ...
      * @return self
      */
     public function andReturn()
@@ -364,8 +425,19 @@ class Expectation
     }
 
     /**
+     * Return this mock, like a fluent interface
+     *
+     * @return self
+     */
+    public function andReturnSelf()
+    {
+        return $this->andReturn($this->_mock);
+    }
+
+    /**
      * Set a sequential queue of return values with an array
      *
+     * @param array $values
      * @return self
      */
     public function andReturnValues(array $values)
@@ -379,6 +451,7 @@ class Expectation
      * values. The arguments passed to the expected method are passed to the
      * closures as parameters.
      *
+     * @param callable ...
      * @return self
      */
     public function andReturnUsing()
@@ -429,7 +502,24 @@ class Expectation
     }
 
     /**
-     * Set a public property on the mock
+     * Set Exception classes to be thrown
+     *
+     * @param array $exceptions
+     * @return self
+     */
+    public function andThrowExceptions(array $exceptions)
+    {
+        $this->_throw = true;
+        foreach ($exceptions as $exception) {
+            if (!is_object($exception)) {
+                throw new Exception('You must pass an array of exception objects to andThrowExceptions');
+            }
+        }
+        return $this->andReturnValues($exceptions);
+    }
+
+    /**
+     * Register values to be set to a public property each time this expectation occurs
      *
      * @param string $name
      * @param mixed $value
@@ -437,13 +527,15 @@ class Expectation
      */
     public function andSet($name, $value)
     {
-        $this->_mock->{$name} = $value;
+        $values = func_get_args();
+        array_shift($values);
+        $this->_setQueue[$name] = $values;
         return $this;
     }
 
     /**
-     * Set a public property on the mock (alias to andSet()). Allows the natural
-     * English construct - set('foo', 'bar')->andReturn('bar')
+     * Alias to andSet(). Allows the natural English construct
+     * - set('foo', 'bar')->andReturn('bar')
      *
      * @param string $name
      * @param mixed $value
@@ -451,7 +543,7 @@ class Expectation
      */
     public function set($name, $value)
     {
-        return $this->andSet($name, $value);
+        return call_user_func_array(array($this, 'andSet'), func_get_args());
     }
 
     /**
@@ -468,10 +560,13 @@ class Expectation
      * Indicates the number of times this expectation should occur
      *
      * @param int $limit
+     * @return self
      */
     public function times($limit = null)
     {
-        if (is_null($limit)) return $this;
+        if (is_null($limit)) {
+            return $this;
+        }
         $this->_countValidators[] = new $this->_countValidatorClass($this, $limit);
         $this->_countValidatorClass = 'Mockery\CountValidator\Exact';
         return $this;
@@ -607,7 +702,7 @@ class Expectation
     public function byDefault()
     {
         $director = $this->_mock->mockery_getExpectationsFor($this->_name);
-        if(!empty($director)) {
+        if (!empty($director)) {
             $director->makeExpectationDefault($this);
         }
         return $this;
@@ -655,4 +750,8 @@ class Expectation
         $this->_countValidators = $newValidators;
     }
 
+    public function getName()
+    {
+        return $this->_name;
+    }
 }

@@ -21,16 +21,18 @@
 
 namespace test\Mockery;
 
-use \PHPUnit_Framework_TestCase as TestCase;
+use Mockery\Adapter\Phpunit\MockeryTestCase;
 
-class MockClassWithFinalWakeupTest extends TestCase
+class MockClassWithFinalWakeupTest extends MockeryTestCase
 {
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->container = new \Mockery\Container;
     }
 
-    protected function tearDown() {
+    protected function tearDown()
+    {
         $this->container->mockery_close();
     }
 
@@ -60,30 +62,35 @@ class MockClassWithFinalWakeupTest extends TestCase
         // Make sure __wakeup is overridden and doesn't return anything.
         $this->assertNull($mock->__wakeup());
     }
-
 }
 
 class TestWithFinalWakeup
 {
 
-    public function foo() {
+    public function foo()
+    {
         return 'foo';
     }
 
-    public function bar() {
+    public function bar()
+    {
         return 'bar';
     }
 
-    public final function __wakeup() {
+    final public function __wakeup()
+    {
         return __METHOD__;
     }
 }
 
-class SubclassWithFinalWakeup extends TestWithFinalWakeup {}
+class SubclassWithFinalWakeup extends TestWithFinalWakeup
+{
+}
 
 class TestWithNonFinalWakeup
 {
-    public function __wakeup() {
+    public function __wakeup()
+    {
         return __METHOD__;
     }
 }

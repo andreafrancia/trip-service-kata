@@ -15,7 +15,7 @@
  * @category   Mockery
  * @package    Mockery
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2010 Pádraic Brady (http://blog.astrumfutura.com)
+ * @copyright  Copyright (c) 2010-2014 Pádraic Brady (http://blog.astrumfutura.com)
  * @license    http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
  */
 
@@ -32,6 +32,20 @@ class WithFormatterExpectationTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @expectedException Mockery\Exception\NoMatchingExpectationException
+     *
+     * Note that without the patch checked in with this test, rather than throwing
+     * an exception, the program will go into an infinite recursive loop
+     */
+    public function testFormatObjectsWithMockCalledInGetterDoesNotLeadToRecursion()
+    {
+        $mock = Mockery::mock('stdClass');
+        $mock->shouldReceive('doBar')->with('foo');
+        $obj = new ClassWithGetter($mock);
+        $obj->getFoo();
+    }
+
     public function formatObjectsDataProvider()
     {
         return array(
@@ -42,8 +56,66 @@ class WithFormatterExpectationTest extends PHPUnit_Framework_TestCase
             array(
                 array('a string', 98768, array('a', 'nother', 'array')),
                 ''
-            )
+            ),
         );
     }
 
+    /** @test */
+    public function format_objects_should_not_call_getters_with_params()
+    {
+        $obj = new ClassWithGetterWithParam();
+        $string = Mockery::formatObjects(array($obj));
+
+        $this->assertNotContains('Missing argument 1 for', $string);
+    }
+
+    public function testFormatObjectsExcludesStaticProperties()
+    {
+        $obj = new ClassWithPublicStaticProperty();
+        $string = Mockery::formatObjects(array($obj));
+
+        $this->assertNotContains('excludedProperty', $string);
+    }
+
+    public function testFormatObjectsExcludesStaticGetters()
+    {
+        $obj = new ClassWithPublicStaticGetter();
+        $string = Mockery::formatObjects(array($obj));
+
+        $this->assertNotContains('getExcluded', $string);
+    }
+}
+
+class ClassWithGetter
+{
+    private $dep;
+
+    public function __construct($dep)
+    {
+        $this->dep = $dep;
+    }
+
+    public function getFoo()
+    {
+        return $this->dep->doBar('bar', $this);
+    }
+}
+
+class ClassWithGetterWithParam
+{
+    public function getBar($bar)
+    {
+    }
+}
+
+class ClassWithPublicStaticProperty
+{
+    public static $excludedProperty;
+}
+
+class ClassWithPublicStaticGetter
+{
+    public static function getExcluded()
+    {
+    }
 }

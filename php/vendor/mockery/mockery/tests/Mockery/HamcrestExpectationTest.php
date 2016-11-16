@@ -15,11 +15,13 @@
  * @category   Mockery
  * @package    Mockery
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2011 Pádraic Brady (http://blog.astrumfutura.com)
+ * @copyright  Copyright (c) 2010-2014 Pádraic Brady (http://blog.astrumfutura.com)
  * @license    http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
  */
 
-class HamcrestExpectationTest extends PHPUnit_Framework_TestCase
+use Mockery\Adapter\Phpunit\MockeryTestCase;
+
+class HamcrestExpectationTest extends MockeryTestCase
 {
 
     public function setUp()
@@ -60,5 +62,4 @@ class HamcrestExpectationTest extends PHPUnit_Framework_TestCase
         $this->mock->foo(1);
         $this->container->mockery_verify();
     }
-
 }

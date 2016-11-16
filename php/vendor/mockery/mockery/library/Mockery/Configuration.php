@@ -14,7 +14,7 @@
  *
  * @category   Mockery
  * @package    Mockery
- * @copyright  Copyright (c) 2010 Pádraic Brady (http://blog.astrumfutura.com)
+ * @copyright  Copyright (c) 2010-2014 Pádraic Brady (http://blog.astrumfutura.com)
  * @license    http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
  */
 
@@ -107,7 +107,8 @@ class Configuration
     /**
      * Remove all overriden parameter maps from internal PHP classes.
      */
-    public function resetInternalClassMethodParamMaps() {
+    public function resetInternalClassMethodParamMaps()
+    {
         $this->_internalClassParamMap = array();
     }
 
@@ -127,5 +128,4 @@ class Configuration
     {
         return $this->_internalClassParamMap;
     }
-
 }
