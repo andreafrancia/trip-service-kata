@@ -14,21 +14,24 @@ class TripServiceTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->service = new TestableTripService();
+        $this->spione = new User(null);
+        $this->spiato = new User(null);
     }
 
     public function test_when_user_is_not_logged_in_it_will_throw_an_exception() {
 
         $this->expectException(UserNotLoggedInException::class);
-        $this->service->getTripsByUser(new User(null));
+        $this->service->getTripsByUser($this->spiato);
     }
 
     public function test_when_user_is_logged_in_but_is_not_a_friend_the_list_is_empty() {
 
-        $this->service->setLoggedInUser(new User(null));
-        $trips = $this->service->getTripsByUser(new User(null));
+        $this->service->setLoggedInUser($this->spione);
+        $trips = $this->service->getTripsByUser($this->spiato);
 
         self::assertEquals(array(), $trips);
     }
+
 }
 
 class TestableTripService extends TripService
