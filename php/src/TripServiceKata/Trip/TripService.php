@@ -20,7 +20,7 @@ class TripService
                 }
             }
             if ($isFriend) {
-                $tripList = TripDAO::findTripsByUser($user);
+                $tripList = $this->findTripsByUser($user);
             }
             return $tripList;
         } else {
@@ -31,5 +31,10 @@ class TripService
     protected function getLoggedInUser()
     {
         return UserSession::getInstance()->getLoggedUser();
+    }
+
+    protected function findTripsByUser(User $user)
+    {
+        return TripDAO::findTripsByUser($user);
     }
 }
