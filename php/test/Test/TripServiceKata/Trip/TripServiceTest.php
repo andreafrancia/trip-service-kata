@@ -32,6 +32,15 @@ class TripServiceTest extends PHPUnit_Framework_TestCase
         self::assertEquals(array(), $trips);
     }
 
+    public function test_1() {
+
+        $this->service->setLoggedInUser($this->spione);
+        $this->spiato->addFriend($this->spione);
+
+        $this->expectException(DependentClassCalledDuringUnitTestException::class);
+        $this->service->getTripsByUser($this->spiato);
+
+    }
 }
 
 class TestableTripService extends TripService
