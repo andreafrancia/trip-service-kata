@@ -2,3 +2,5 @@
 /bin
 /composer.phar
 .phpunit.result.cache
+!/.idea
+/.idea/workspace.xml
