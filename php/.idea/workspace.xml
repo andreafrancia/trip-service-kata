@@ -115,10 +115,9 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="223" />
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="800" />
-    <option name="height" value="547" />
+    <option name="height" value="600" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
