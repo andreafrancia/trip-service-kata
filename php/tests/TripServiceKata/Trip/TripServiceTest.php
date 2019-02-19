@@ -1,8 +1,10 @@
 <?php
 
+namespace TripServiceKata\Trip;
+
 use PHPUnit\Framework\TestCase;
 
-class TripServiceKataTest extends TestCase
+class TripServiceTest extends TestCase
 {
     function test_something() {
         self::assertEquals(1,1);
