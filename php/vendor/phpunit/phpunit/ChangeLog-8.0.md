@@ -2,6 +2,22 @@
 
 All notable changes of the PHPUnit 8.0 release series are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [8.0.4] - 2019-02-18
+
+* Fixed [#3530](https://github.com/sebastianbergmann/phpunit/issues/3530): `generateClassFromWsdl()` does not handle methods with multiple output values
+* Fixed [#3531](https://github.com/sebastianbergmann/phpunit/issues/3531): Test suite fails on warning
+* Fixed [#3534](https://github.com/sebastianbergmann/phpunit/pull/3534): Wrong message in `ConstraintTestCase`
+* Fixed [#3535](https://github.com/sebastianbergmann/phpunit/issues/3535): `TypeError` in `Command`
+
+## [8.0.3] - 2019-02-15
+
+### Fixed
+
+* Fixed [#3011](https://github.com/sebastianbergmann/phpunit/issues/3011): Unsupported PHPT `--SECTION--` throws unhandled exception
+* Fixed [#3461](https://github.com/sebastianbergmann/phpunit/issues/3461): `StringEndsWith` matches too loosely
+* Fixed [#3515](https://github.com/sebastianbergmann/phpunit/issues/3515): Random order seed is only printed in verbose mode
+* Fixed [#3517](https://github.com/sebastianbergmann/phpunit/issues/3517): Useless error message when depending on test that does not exist
+
 ## [8.0.2] - 2019-02-07
 
 ### Fixed
@@ -45,6 +61,8 @@ All notable changes of the PHPUnit 8.0 release series are documented in this fil
 * Implemented [#2762](https://github.com/sebastianbergmann/phpunit/issues/2762): Drop support for PHP 7.1
 * Implemented [#3123](https://github.com/sebastianbergmann/phpunit/issues/3123): Remove `PHPUnit_Framework_MockObject_MockObject`
 
+[8.0.4]: https://github.com/sebastianbergmann/phpunit/compare/8.0.3...8.0.4
+[8.0.3]: https://github.com/sebastianbergmann/phpunit/compare/8.0.2...8.0.3
 [8.0.2]: https://github.com/sebastianbergmann/phpunit/compare/8.0.1...8.0.2
 [8.0.1]: https://github.com/sebastianbergmann/phpunit/compare/8.0.0...8.0.1
 [8.0.0]: https://github.com/sebastianbergmann/phpunit/compare/7.5...8.0.0

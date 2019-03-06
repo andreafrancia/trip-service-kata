@@ -10,11 +10,9 @@ addons:
 php:
   - 7.2
   - 7.3
-  - master
+  - 7.4snapshot
 
 matrix:
-  allow_failures:
-    - php: master
   fast_finish: true
 
 env:
