@@ -24,12 +24,28 @@ class TripServiceTest extends TestCase
         $this->service->getTripsByUser(new User(null));
     }
 
+    function test_something()
+    {
+        $this->service->setLoggedInUser(new User("a registered user"));
+
+        $trips = $this->service->getTripsByUser(new User(null));
+
+        self::assertSame([], $trips);
+    }
+
 }
 
 class TestableTripService extends TripService
 {
+    private $loggedInUser;
+
+    public function setLoggedInUser(User $loggedInUser)
+    {
+        $this->loggedInUser = $loggedInUser;
+    }
+
     protected function getLoggedInUser()
     {
-        return null;
+        return $this->loggedInUser;
     }
 }
