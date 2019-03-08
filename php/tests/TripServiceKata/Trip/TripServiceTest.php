@@ -21,6 +21,9 @@ class TripServiceTest extends TestCase
         $this->a_stranger = new User(null);
         $this->a_user = new User(null);
         $this->service = new TestableTripService();
+        $this->a_friend = new User("a friend");
+        $this->a_friend->addFriend($this->a_registed_user);
+
     }
 
     function test_only_logged_in_user_can_access()
@@ -30,13 +33,22 @@ class TripServiceTest extends TestCase
         $this->service->getTripsByUser($this->a_user);
     }
 
-    function test_when_user_is_logged_in()
+    function test_spying_a_stanger()
     {
         $this->service->setLoggedInUser($this->a_registed_user);
 
         $trips = $this->service->getTripsByUser($this->a_stranger);
 
         self::assertSame([], $trips);
+    }
+
+    function test_spying_a_friend()
+    {
+        $this->service->setLoggedInUser($this->a_registed_user);
+
+        $trips = $this->service->getTripsByUser($this->a_friend);
+
+        self::assertSame("trips of user", $trips);
     }
 
 }
@@ -53,5 +65,9 @@ class TestableTripService extends TripService
     protected function getLoggedInUser()
     {
         return $this->loggedInUser;
+    }
+    protected function loadTripsForUser(User $user)
+    {
+        return "trips of user";
     }
 }
