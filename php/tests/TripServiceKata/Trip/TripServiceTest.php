@@ -4,21 +4,32 @@ namespace TripServiceKata\Trip;
 
 use PHPUnit\Framework\TestCase;
 use TripServiceKata\Exception\DependentClassCalledDuringUnitTestException;
+use TripServiceKata\Exception\UserNotLoggedInException;
 use TripServiceKata\User\User;
 
 class TripServiceTest extends TestCase
 {
-    /** @var TripService */
+    /** @var TestableTripService */
     private $service;
 
     protected function setUp(): void
     {
-        $this->service = new TripService();
+        $this->service = new TestableTripService();
     }
 
-    function test_something() {
-        $this->expectException(DependentClassCalledDuringUnitTestException::class);
+    function test_only_logged_in_user_can_access()
+    {
+        $this->expectException(UserNotLoggedInException::class);
+
         $this->service->getTripsByUser(new User(null));
     }
 
+}
+
+class TestableTripService extends TripService
+{
+    protected function getLoggedInUser()
+    {
+        return null;
+    }
 }
