@@ -33,7 +33,7 @@ class TripServiceTest extends TestCase
         $this->service->getTripsByUser($this->a_user);
     }
 
-    function test_spying_a_stanger()
+    function test_can_not_see_trips_of_a_stranger()
     {
         $this->service->setLoggedInUser($this->a_registed_user);
 
@@ -42,7 +42,7 @@ class TripServiceTest extends TestCase
         self::assertSame([], $trips);
     }
 
-    function test_spying_a_friend()
+    function test_can_see_trips_of_a_friend()
     {
         $this->service->setLoggedInUser($this->a_registed_user);
 
