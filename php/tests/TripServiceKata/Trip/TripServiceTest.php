@@ -11,9 +11,15 @@ class TripServiceTest extends TestCase
 {
     /** @var TestableTripService */
     private $service;
+    private $a_user;
+    private $a_stranger;
+    private $a_registed_user;
 
     protected function setUp(): void
     {
+        $this->a_registed_user = new User("a registered user");
+        $this->a_stranger = new User(null);
+        $this->a_user = new User(null);
         $this->service = new TestableTripService();
     }
 
@@ -21,14 +27,14 @@ class TripServiceTest extends TestCase
     {
         $this->expectException(UserNotLoggedInException::class);
 
-        $this->service->getTripsByUser(new User(null));
+        $this->service->getTripsByUser($this->a_user);
     }
 
-    function test_something()
+    function test_when_user_is_logged_in()
     {
-        $this->service->setLoggedInUser(new User("a registered user"));
+        $this->service->setLoggedInUser($this->a_registed_user);
 
-        $trips = $this->service->getTripsByUser(new User(null));
+        $trips = $this->service->getTripsByUser($this->a_stranger);
 
         self::assertSame([], $trips);
     }
