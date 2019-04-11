@@ -1,0 +1,2 @@
+#!/bin/bash
+phpunit && git add --all && git commit -m "Pass." || true
