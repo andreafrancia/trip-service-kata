@@ -1,6 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="TripServiceTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
     <TestRunner class="TripServiceKata\Trip\TripServiceTest" file="$PROJECT_DIR$/tests/TripServiceKata/Trip/TripServiceTest.php" scope="Class" />
-    <method v="2" />
+    <method v="2">
+      <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_External Tools_commit-when-passes" />
+    </method>
   </configuration>
 </component>
