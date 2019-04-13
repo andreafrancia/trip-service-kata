@@ -27,7 +27,7 @@ class TripServiceTest extends TestCase
     /** @var TestableTripService */
     private $service;
 
-    function test_se_non_sei_loggato_non_puoi_utilizzare_il_servizio()
+    function test_solo_utenti_loggati_possono_accedere()
     {
         $this->service->setLoggedInUser(null);
 
