@@ -59,7 +59,7 @@ class TripServiceTest extends TestCase
 
         $tripsFound = $this->service->getTripsByUser($this->unAmico);
 
-        self::assertEquals('', $tripsFound);
+        self::assertSame(null, $tripsFound);
     }
 
     protected function setUp(): void
