@@ -14,7 +14,7 @@ class TripServiceTest extends TestCase
     function test_something()
     {
         $this->expectException(DependentClassCalledDuringUnitTestException::class);
-        
+
         $this->service->getTripsByUser(new User(""));
     }
 
