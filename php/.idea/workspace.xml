@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6928fbb-0b8f-414a-a7e4-eb77640e951a" name="Default Changelist" comment="" />
+    <list default="true" id="b6928fbb-0b8f-414a-a7e4-eb77640e951a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/TripServiceKata/Trip/TripService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TripServiceKata/Trip/TripService.php" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/vendor/composer/" />
     <ignored path="$PROJECT_DIR$/vendor/doctrine/instantiator/" />
     <ignored path="$PROJECT_DIR$/vendor/myclabs/deep-copy/" />
@@ -82,8 +84,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/TripServiceKata/Trip/TripService.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="268">
-                  <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+                <state relative-caret-position="98">
+                  <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
                 </state>
               </provider>
             </entry>
@@ -280,20 +282,11 @@
       <workItem from="1550510546580" duration="791000" />
       <workItem from="1550563818221" duration="78000" />
       <workItem from="1551860481158" duration="3469000" />
-      <workItem from="1555165589374" duration="2844000" />
+      <workItem from="1555165589374" duration="2890000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TripServiceTest - 2019.04.13 at 17h 15m 23s.xml">
-      <configuration name="TripServiceTest" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="TripServiceTest - 2019.04.13 at 17h 15m 53s.xml">
-      <configuration name="TripServiceTest" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="TripServiceTest - 2019.04.13 at 17h 16m 09s.xml">
-      <configuration name="TripServiceTest" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="TripServiceTest - 2019.04.13 at 17h 17m 09s.xml">
       <configuration name="TripServiceTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
@@ -315,9 +308,18 @@
     <history-entry file="TripServiceTest - 2019.04.13 at 17h 21m 29s.xml">
       <configuration name="TripServiceTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="TripServiceTest - 2019.04.13 at 17h 21m 34s.xml">
+      <configuration name="TripServiceTest" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="TripServiceTest - 2019.04.13 at 17h 21m 38s.xml">
+      <configuration name="TripServiceTest" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="TripServiceTest - 2019.04.13 at 17h 21m 49s.xml">
+      <configuration name="TripServiceTest" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7182000" />
+    <option name="totallyTimeSpent" value="7228000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1024" height="617" extended-state="6" />
@@ -349,7 +351,7 @@
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/php$TripServiceTest.xml" NAME="TripServiceTest Coverage Results" MODIFIED="1555168889497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="PhpCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/php$TripServiceTest.xml" NAME="TripServiceTest Coverage Results" MODIFIED="1555168908750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="PhpCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/tests/TripServiceKataTest.php" />
@@ -404,8 +406,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TripServiceKata/Trip/TripService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+        <state relative-caret-position="98">
+          <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
         </state>
       </provider>
     </entry>
