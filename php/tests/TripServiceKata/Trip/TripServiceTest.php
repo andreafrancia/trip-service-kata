@@ -28,6 +28,7 @@ class TripServiceTest extends TestCase
     private $service;
     private $loggedInUser;
     private $unoSconosciuto;
+    private $unAmico;
 
     function test_solo_utenti_loggati_possono_accedere()
     {
