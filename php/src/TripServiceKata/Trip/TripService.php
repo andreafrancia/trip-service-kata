@@ -11,17 +11,10 @@ class TripService
     public function getTripsByUser(User $user) {
         $loggedUser = $this->getLoggedInUser();
         if ($loggedUser != null) {
-            $user->isFriendOf($loggedUser);
-            $isFriend = false;
-            foreach ($user->getFriends() as $friend) {
-                if ($friend == $loggedUser) {
-                    $isFriend = true;
-                    break;
-                }
-            }
-            if ($isFriend) {
+            if ($user->isFriendOf($loggedUser)) {
                 return $this->loadTripsOfUser($user);
             }
+
             return [];
         } else {
             throw new UserNotLoggedInException();

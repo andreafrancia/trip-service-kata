@@ -39,6 +39,13 @@ class User
 
     public function isFriendOf($loggedUser)
     {
-        
+        $isFriend = false;
+        foreach ($this->getFriends() as $friend) {
+            if ($friend == $loggedUser) {
+                $isFriend = true;
+                break;
+            }
+        }
+        return $isFriend;
     }
 }
