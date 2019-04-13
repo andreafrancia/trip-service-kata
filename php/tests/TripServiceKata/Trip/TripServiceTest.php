@@ -6,6 +6,11 @@ use PHPUnit\Framework\TestCase;
 use TripServiceKata\Exception\DependentClassCalledDuringUnitTestException;
 use TripServiceKata\User\User;
 
+class TestableTripService extends TripService
+{
+        
+}
+
 class TripServiceTest extends TestCase
 {
     /** @var TripService */
