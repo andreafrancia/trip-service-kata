@@ -22,7 +22,7 @@ class TestableTripService extends TripService
     }
     protected function loadTripsOfUser(User $user)
     {
-        return null;
+        return "viaggi trovati";
     }
 }
 
@@ -59,7 +59,7 @@ class TripServiceTest extends TestCase
 
         $tripsFound = $this->service->getTripsByUser($this->unAmico);
 
-        self::assertSame(null, $tripsFound);
+        self::assertSame('viaggi trovati', $tripsFound);
     }
 
     protected function setUp(): void
