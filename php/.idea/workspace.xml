@@ -53,14 +53,14 @@
     <option name="myElementSize" value="75" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.51934826">
+    <splitter split-orientation="horizontal" split-proportion="0.78716904">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/tests/TripServiceKata/Trip/TripServiceTest.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="119">
-                  <caret line="59" selection-start-line="59" selection-end-line="59" />
+                <state relative-caret-position="153">
+                  <caret line="61" column="44" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
                   <folding>
                     <element signature="e#40#71#0#PHP" expanded="true" />
                   </folding>
@@ -282,14 +282,11 @@
       <workItem from="1550510546580" duration="791000" />
       <workItem from="1550563818221" duration="78000" />
       <workItem from="1551860481158" duration="3469000" />
-      <workItem from="1555165589374" duration="2422000" />
+      <workItem from="1555165589374" duration="2447000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TripServiceTest - 2019.04.13 at 17h 10m 37s.xml">
-      <configuration name="TripServiceTest" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="TripServiceTest - 2019.04.13 at 17h 11m 07s.xml">
       <configuration name="TripServiceTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
@@ -317,9 +314,12 @@
     <history-entry file="TripServiceTest - 2019.04.13 at 17h 14m 22s.xml">
       <configuration name="TripServiceTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="TripServiceTest - 2019.04.13 at 17h 14m 31s.xml">
+      <configuration name="TripServiceTest" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6760000" />
+    <option name="totallyTimeSpent" value="6785000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1024" height="617" extended-state="6" />
@@ -351,7 +351,7 @@
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/php$TripServiceTest.xml" NAME="TripServiceTest Coverage Results" MODIFIED="1555168461920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="PhpCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/php$TripServiceTest.xml" NAME="TripServiceTest Coverage Results" MODIFIED="1555168471259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="PhpCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/tests/TripServiceKataTest.php" />
@@ -403,8 +403,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/TripServiceKata/Trip/TripServiceTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
+        <state relative-caret-position="153">
+          <caret line="61" column="44" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
           <folding>
             <element signature="e#40#71#0#PHP" expanded="true" />
           </folding>
