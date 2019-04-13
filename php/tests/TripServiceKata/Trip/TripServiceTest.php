@@ -60,7 +60,9 @@ class TripServiceTest extends TestCase
     protected function setUp(): void
     {
         $this->unoSconosciuto = new User("");
+        $this->unAmico = new User("un amico");
         $this->loggedInUser = new User("logged user");
+        $this->unAmico->addFriend($this->loggedInUser);
         $this->service = new TestableTripService();
     }
 }
