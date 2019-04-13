@@ -11,8 +11,9 @@ class TripService
     public function getTripsByUser(User $user) {
         $loggedUser = $this->getLoggedInUser();
         if ($loggedUser != null) {
-            if ($user->isFriendOf($loggedUser))
+            if ($user->isFriendOf($loggedUser)) {
                 return $this->loadTripsOfUser($user);
+            }
 
             return [];
         } else {
