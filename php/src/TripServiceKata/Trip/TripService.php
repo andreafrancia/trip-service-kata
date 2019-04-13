@@ -10,8 +10,8 @@ class TripService
 {
     public function getTripsByUser(User $user) {
         $loggedUser = $this->getLoggedInUser();
-        $isFriend = false;
         if ($loggedUser != null) {
+            $isFriend = false;
             foreach ($user->getFriends() as $friend) {
                 if ($friend == $loggedUser) {
                     $isFriend = true;
