@@ -26,6 +26,8 @@ class TripServiceTest extends TestCase
 {
     /** @var TestableTripService */
     private $service;
+    private $loggedInUser;
+    private $unoSconosciuto;
 
     function test_solo_utenti_loggati_possono_accedere()
     {
@@ -39,15 +41,26 @@ class TripServiceTest extends TestCase
 
     function test_non_puoi_vedere_i_viaggi_di_sconosciuti()
     {
-        $this->service->setLoggedInUser(new User("logged user"));
+        $this->service->setLoggedInUser($this->loggedInUser);
 
-        $tripsFound = $this->service->getTripsByUser(new User(""));
+        $tripsFound = $this->service->getTripsByUser($this->unoSconosciuto);
+
+        self::assertEquals([], $tripsFound);
+    }
+
+    function test_1()
+    {
+        $this->service->setLoggedInUser($this->loggedInUser);
+
+        $tripsFound = $this->service->getTripsByUser($this->unoSconosciuto);
 
         self::assertEquals([], $tripsFound);
     }
 
     protected function setUp(): void
     {
+        $this->unoSconosciuto = new User("");
+        $this->loggedInUser = new User("logged user");
         $this->service = new TestableTripService();
     }
 }
