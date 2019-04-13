@@ -21,7 +21,7 @@ class TripService
             if ($isFriend) {
                 return $this->loadTripsOfUser($user);
             }
-            return array();
+            return [];
         } else {
             throw new UserNotLoggedInException();
         }
