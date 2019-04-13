@@ -18,10 +18,10 @@ class TripService
                     break;
                 }
             }
-            $tripList = array();
             if ($isFriend) {
                 return $this->loadTripsOfUser($user);
             }
+            $tripList = array();
             return $tripList;
         } else {
             throw new UserNotLoggedInException();
