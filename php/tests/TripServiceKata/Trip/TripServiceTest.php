@@ -27,9 +27,9 @@ class TripServiceTest extends TestCase
         $this->service->getTripsByUser(new User(""));
     }
 
+
     protected function setUp(): void
     {
         $this->service = new TestableTripService();
-        parent::setUp();
     }
 }
