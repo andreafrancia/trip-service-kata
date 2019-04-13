@@ -11,14 +11,10 @@ class TestableTripService extends TripService
 {
     private $loggedInUser;
 
-    /**
-     * @param mixed $loggedInUser
-     */
     public function setLoggedInUser($loggedInUser): void
     {
         $this->loggedInUser = $loggedInUser;
     }
-
 
     protected function getLoggedInUser()
     {
