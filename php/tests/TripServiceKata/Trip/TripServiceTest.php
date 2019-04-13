@@ -39,10 +39,8 @@ class TripServiceTest extends TestCase
 
     function test_quando_sei_loggato()
     {
-        $this->service->setLoggedInUser(null);
-
-        $this->expectException(UserNotLoggedInException::class);
-
+        $this->service->setLoggedInUser(new User("logged user"));
+        
         $this->service->getTripsByUser(new User(""));
     }
 
