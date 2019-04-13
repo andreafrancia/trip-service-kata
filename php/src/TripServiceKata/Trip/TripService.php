@@ -20,7 +20,7 @@ class TripService
             }
             $tripList = array();
             if ($isFriend) {
-                $tripList = $this->loadTripsOfUser($user);
+                return $this->loadTripsOfUser($user);
             }
             return $tripList;
         } else {
