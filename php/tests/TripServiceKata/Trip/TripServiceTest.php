@@ -40,8 +40,10 @@ class TripServiceTest extends TestCase
     function test_quando_sei_loggato()
     {
         $this->service->setLoggedInUser(new User("logged user"));
-        
-        $this->service->getTripsByUser(new User(""));
+
+        $tripsFound = $this->service->getTripsByUser(new User(""));
+
+        self::assertEquals([], $tripsFound);
     }
 
     protected function setUp(): void
