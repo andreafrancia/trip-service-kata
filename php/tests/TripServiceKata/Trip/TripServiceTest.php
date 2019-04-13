@@ -8,12 +8,12 @@ use TripServiceKata\User\User;
 
 class TestableTripService extends TripService
 {
-        
+
 }
 
 class TripServiceTest extends TestCase
 {
-    /** @var TripService */
+    /** @var TestableTripService */
     private $service;
 
     function test_something()
@@ -25,7 +25,7 @@ class TripServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->service = new TripService();
+        $this->service = new TestableTripService();
         parent::setUp();
     }
 }
