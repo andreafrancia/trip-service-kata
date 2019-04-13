@@ -37,7 +37,7 @@ class TripServiceTest extends TestCase
     }
 
 
-    function test_quando_sei_loggato()
+    function test_quando_sei_loggato_e_non_sei_amico_non_vedi_viaggi()
     {
         $this->service->setLoggedInUser(new User("logged user"));
 
