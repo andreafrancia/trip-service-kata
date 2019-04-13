@@ -52,10 +52,8 @@ class TripServiceTest extends TestCase
     function test_1()
     {
         $this->service->setLoggedInUser($this->loggedInUser);
-
-        $tripsFound = $this->service->getTripsByUser($this->unoSconosciuto);
-
-        self::assertEquals([], $tripsFound);
+        $this->expectException(DependentClassCalledDuringUnitTestException::class);
+        $this->service->getTripsByUser($this->unAmico);
     }
 
     protected function setUp(): void
